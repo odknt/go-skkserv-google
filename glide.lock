@@ -1,0 +1,14 @@
+hash: ce89f6e8630962de66a45c31839a9dc38a59f26c3064ff5d900d25ed43e50ef7
+updated: 2017-07-19T11:52:01.85912713+09:00
+imports:
+- name: github.com/uyorum/go-skk-dictionary
+  version: d908e58b11b9de5a274900bed22e0916ecef0710
+- name: golang.org/x/text
+  version: 836efe42bb4aa16aaa17b9c155d8813d336ed720
+  subpackages:
+  - encoding
+  - encoding/internal
+  - encoding/internal/identifier
+  - encoding/japanese
+  - transform
+testImports: []

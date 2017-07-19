@@ -1,0 +1,6 @@
+package: github.com/uyorum/go-skkserv-google
+import:
+- package: github.com/uyorum/go-skk-dictionary
+- package: golang.org/x/text
+  subpackages:
+  - encoding/japanese
