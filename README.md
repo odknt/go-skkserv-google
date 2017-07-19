@@ -19,6 +19,8 @@ $ ./skkserv-google ./SKK-JISYO.L
 ``` shell
 -p int
       Port number skkserv uses (default 1178)
+-n int
+      Number of API results (default 100)
 ```
 
 ### Run in Docker
