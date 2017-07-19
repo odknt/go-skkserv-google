@@ -17,6 +17,7 @@ import (
 const AppName = "skkserv-google"
 const AppVersion = "0.0.1"
 
+var num_of_results *string
 var port_num *string
 var verbose *bool
 var dictionary_path_list []string
@@ -36,6 +37,7 @@ Options
 		flag.PrintDefaults()
 	}
 
+	num_of_results = flag.String("n", "100", "Number of API results")
 	port_num = flag.String("p", "1178", "Port number skkserv uses")
 	verbose = flag.Bool("v", false, "Print request and respons to stdout")
 	flag.Parse()
@@ -112,7 +114,7 @@ func (s *GoogleIMESKK) ReturnTrans(b []byte) ([]byte, error) {
 
 func TransliterateWithGoogle(text string) (words []string, err error) {
 	v := url.Values{"langpair": {"ja-Hira|ja"}, "text": {text + ","}}
-	resp, err := http.Get("http://www.google.com/transliterate?" + v.Encode())
+	resp, err := http.Get("http://www.google.com/transliterate?" + v.Encode() + "&n=" + *num_of_results)
 	if err != nil {
 		return nil, err
 	}
