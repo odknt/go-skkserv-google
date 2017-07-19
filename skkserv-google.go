@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"regexp"
 	"strings"
 
 	"github.com/uyorum/go-skk-dictionary"
@@ -26,6 +27,11 @@ var encoder = japanese.EUCJP.NewEncoder()
 
 // EUCJP to UTF-8
 var decoder = japanese.EUCJP.NewDecoder()
+
+// Regexp
+var hira = regexp.MustCompile("^[ぁ-ゞ〜ー]+$")
+var kata = regexp.MustCompile("^[ァ-ヾ〜ー]+$")
+var kata_half = regexp.MustCompile("^[ｱ-ﾝﾞﾟｧ-ｫｬ-ｮｰ｡｢｣､~-]+$")
 
 func init() {
 	flag.Usage = func() {
@@ -123,6 +129,9 @@ func TransliterateWithGoogle(text string) (words []string, err error) {
 		return nil, err
 	}
 	for _, v := range w[0][1].([]interface{}) {
+		if hira.MatchString(v.(string)) || kata.MatchString(v.(string)) || kata_half.MatchString(v.(string)) {
+			continue
+		}
 		words = append(words, v.(string))
 	}
 	return words, nil
